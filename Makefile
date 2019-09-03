@@ -6,4 +6,5 @@ bootstrap:
 	npm install
 
 test:
+	make lint
 	newman run PayAsYouGo.postman_collection.json -e AsYouGo.postman_environment.json
