@@ -2,7 +2,6 @@
   "name": "Test-Jenkins-Newman",
   "version": "1.0.0",
   "description": "Testing Jenkins integration using Newman.",
-  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/aamir4hmed/Test-Jenkins-Newman.git"
