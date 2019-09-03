@@ -1,0 +1,1314 @@
+{
+	"info": {
+		"_postman_id": "5112c75b-6360-4c21-a1ec-dad77716a6ad",
+		"name": "PayAsYouGo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Merchants",
+			"item": [
+				{
+					"name": "Add Merchant",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "6a845eb5-eff3-4149-936f-877639067d72",
+								"exec": [
+									"const merchants = [{",
+									"'MerchantEmail':'cancerian_edict@gmail.com',",
+									"'MerchantName': 'Cancerian',",
+									"'MerchantID': \"CancerianEdict\"",
+									"},",
+									"{",
+									"'MerchantEmail':'libran_edict@gmail.com',",
+									"'MerchantName': 'Libran',",
+									"'MerchantID': \"LibranEdict\"",
+									"},",
+									"{",
+									"'MerchantEmail':'capricorn_edict@gmail.com',",
+									"'MerchantName': 'Capricorn',",
+									"'MerchantID': \"CapricornEdict\"",
+									"}",
+									"]",
+									"",
+									"const merchant  = _.sample(merchants)",
+									"pm.environment.set(\"MerchantName\", merchant.MerchantName);",
+									"pm.environment.set(\"MerchantEmail\", merchant.MerchantEmail);",
+									"pm.environment.set(\"MerchantID\", merchant.MerchantID);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "fc5f87c1-2eec-46f1-8141-94c232ebe0d2",
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.test(\"Verify MerchantID\", function () {",
+									"    var MerchantID = pm.environment.get(\"MerchantID\");",
+									"    pm.expect(jsonData.args.MerchantID).to.eql(MerchantID);",
+									"});",
+									"",
+									"pm.test(\"Verify Merchant Name\", function () {",
+									"    var Name = pm.environment.get(\"MerchantName\");",
+									"    pm.expect(jsonData.args.MerchantName).to.eql(Name);",
+									"});",
+									"",
+									"pm.test(\"Verify Merchant Email\", function () {",
+									"    var Email = pm.environment.get(\"MerchantEmail\");",
+									"    pm.expect(jsonData.args.MerchantEmail).to.eql(Email);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "postman-echo.com/post?MerchantName={{MerchantName}}&MerchantID={{MerchantID}}&MerchantEmail={{MerchantEmail}}",
+							"host": [
+								"postman-echo",
+								"com"
+							],
+							"path": [
+								"post"
+							],
+							"query": [
+								{
+									"key": "MerchantName",
+									"value": "{{MerchantName}}"
+								},
+								{
+									"key": "MerchantID",
+									"value": "{{MerchantID}}"
+								},
+								{
+									"key": "MerchantEmail",
+									"value": "{{MerchantEmail}}"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Add Merchant",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "",
+										"type": "text",
+										"value": "",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://7dbf3984-55c1-4f70-851b-4192dabd5815.mock.pstmn.io/merchants?MerchantName={{MerchantName}}&MerchantID={{MerchantID}}&MerchantEmail={{MerchantEmail}}",
+									"protocol": "https",
+									"host": [
+										"7dbf3984-55c1-4f70-851b-4192dabd5815",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"merchants"
+									],
+									"query": [
+										{
+											"key": "MerchantName",
+											"value": "{{MerchantName}}"
+										},
+										{
+											"key": "MerchantID",
+											"value": "{{MerchantID}}"
+										},
+										{
+											"key": "MerchantEmail",
+											"value": "{{MerchantEmail}}"
+										}
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": ""
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": ""
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": ""
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Expose-Headers",
+									"value": ""
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 27 May 2019 10:49:42 GMT"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"af-MmpVeTvfnSW88c4riXD0uw\""
+								},
+								{
+									"key": "Server",
+									"value": "nginx"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "x-srv-span",
+									"value": "v=1;s=9d0ed76eaadeb5eb"
+								},
+								{
+									"key": "x-srv-trace",
+									"value": "v=1;t=a142f30868a65d19"
+								},
+								{
+									"key": "Content-Length",
+									"value": "148"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"MerchantName\": \"{{MerchantName}}\",\n    \"MerchantID\": \"{{MerchantID}}\",\n    \"MerchantEmail\": \"{{MerchantEmail}}\",\n    \"Status\": \"Merchant is Created\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Merchant",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "ab7516f0-7915-4acc-a840-b68b6daa60ce",
+								"exec": [
+									"pm.environment.set(\"MerchantName\", \"Gemini\");",
+									"pm.environment.set(\"MerchantEmail\", \"gemini_edict@gmail.com\");",
+									"pm.environment.set(\"MerchantID\", \"GeminiEdict\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "d21a7357-c989-4dab-8bab-a749d63573cf",
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.test(\"Verify MerchantID\", function () {",
+									"    var MerchantID = pm.environment.get(\"MerchantID\");",
+									"    pm.expect(jsonData.args.MerchantID).to.eql(MerchantID);",
+									"});",
+									"",
+									"pm.test(\"Verify Merchant Name\", function () {",
+									"    var Name = pm.environment.get(\"MerchantName\");",
+									"    pm.expect(jsonData.args.MerchantName).to.eql(Name);",
+									"});",
+									"",
+									"pm.test(\"Verify Merchant Email\", function () {",
+									"    var Email = pm.environment.get(\"MerchantEmail\");",
+									"    pm.expect(jsonData.args.MerchantEmail).to.eql(Email);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});",
+									"",
+									"postman.setNextRequest(\"List of Merchants\");",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer"
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "postman-echo.com/put?MerchantName={{MerchantName}}&MerchantID={{MerchantID}}&MerchantEmail={{MerchantEmail}}",
+							"host": [
+								"postman-echo",
+								"com"
+							],
+							"path": [
+								"put"
+							],
+							"query": [
+								{
+									"key": "MerchantName",
+									"value": "{{MerchantName}}"
+								},
+								{
+									"key": "MerchantID",
+									"value": "{{MerchantID}}"
+								},
+								{
+									"key": "MerchantEmail",
+									"value": "{{MerchantEmail}}"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update Merchant",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/merchant?MerchantName={{MerchantName}}&MerchantID={{MerchantID}}&MerchantEmail={{MerchantEmail}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"merchant"
+									],
+									"query": [
+										{
+											"key": "MerchantName",
+											"value": "{{MerchantName}}"
+										},
+										{
+											"key": "MerchantID",
+											"value": "{{MerchantID}}"
+										},
+										{
+											"key": "MerchantEmail",
+											"value": "{{MerchantEmail}}"
+										}
+									]
+								}
+							},
+							"status": "Accepted",
+							"code": 202,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": ""
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": ""
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": ""
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Expose-Headers",
+									"value": ""
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 27 May 2019 11:05:26 GMT"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"a7-kIxN5L9H0YwilUQPUUio9A\""
+								},
+								{
+									"key": "Server",
+									"value": "nginx"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "x-srv-span",
+									"value": "v=1;s=b457110c8c0d7d85"
+								},
+								{
+									"key": "x-srv-trace",
+									"value": "v=1;t=fd0d4c4e9c28134c"
+								},
+								{
+									"key": "Content-Length",
+									"value": "152"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"MerchantName\": \"{{MerchantName}}\",\n    \"MerchantID\": \"{{MerchantID}}\",\n    \"MerchantEmail\": \"{{MerchantEmail}}\",\n    \"Status\": \"Merchant is Updated\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Merchant",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "d7c3e460-af65-4425-bb03-752dba1f89f7",
+								"exec": [
+									"pm.environment.unset(\"MerchantEmail\");",
+									"pm.environment.unset(\"MerchantName\");",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "0c0c34b9-e2e0-497f-a45c-077c908f50b2",
+								"exec": [
+									"pm.test(\"Merchant Deleted\", function () {",
+									"    pm.expect(pm.response.code).to.be.eql(200);",
+									"    pm.expect(pm.response.json().Status).to.be.eql('Merchant is Deleted');",
+									"    pm.expect(pm.environment.get(\"MerchantName\")).to.be.undefined;",
+									"    pm.expect(pm.environment.get(\"MerchantEmail\")).to.be.undefined;",
+									"});",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});",
+									"",
+									"postman.setNextRequest(\"Add a Branch\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer"
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://7dbf3984-55c1-4f70-851b-4192dabd5815.mock.pstmn.io/merchant_delete",
+							"protocol": "https",
+							"host": [
+								"7dbf3984-55c1-4f70-851b-4192dabd5815",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"merchant_delete"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete Merchant",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://7dbf3984-55c1-4f70-851b-4192dabd5815.mock.pstmn.io/merchant_delete",
+									"protocol": "https",
+									"host": [
+										"7dbf3984-55c1-4f70-851b-4192dabd5815",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"merchant_delete"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": ""
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": ""
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": ""
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Expose-Headers",
+									"value": ""
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 27 May 2019 11:33:02 GMT"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"61-kmjNuReHzOlDqcwaUGNlfg\""
+								},
+								{
+									"key": "Server",
+									"value": "nginx"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "x-srv-span",
+									"value": "v=1;s=6eaed19a436a3b6f"
+								},
+								{
+									"key": "x-srv-trace",
+									"value": "v=1;t=4c60bc6796006839"
+								},
+								{
+									"key": "Content-Length",
+									"value": "86"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"MerchantName\": \"{{MerchantName}}\",\n    \"MerchantID\": \"{{MerchantID}}\",\n    \"MerchantEmail\": \"{{MerchantEmail}}\",\n    \"Status\": \"Merchant is Deleted\"\n}"
+						}
+					]
+				},
+				{
+					"name": "List of Merchants",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "202cbe65-6044-4673-ae46-343e9cb035c9",
+								"exec": [
+									"const merchants = [{",
+									"'MerchantEmail':'gemini_edict@gmail.com',",
+									"'MerchantName': 'Gemini',",
+									"'MerchantID': \"GeminiEdict\"",
+									"},",
+									"{",
+									"'MerchantEmail':'cancerian_edict@gmail.com',",
+									"'MerchantName': 'Cancerian',",
+									"'MerchantID': \"CancerianEdict\"",
+									"},",
+									"{",
+									"'MerchantEmail':'libran_edict@gmail.com',",
+									"'MerchantName': 'Libran',",
+									"'MerchantID': \"LibranEdict\"",
+									"},",
+									"{",
+									"'MerchantEmail':'capricorn_edict@gmail.com',",
+									"'MerchantName': 'Capricorn',",
+									"'MerchantID': \"CapricornEdict\"",
+									"}",
+									"]",
+									"",
+									"pm.environment.set(\"Merchants\", JSON.stringify(merchants));",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "cf0b8a3d-3c42-47e1-a9e6-227ebc95498c",
+								"exec": [
+									"pm.test(\"Response includes String\", function () {",
+									"    pm.expect(pm.response.text()).to.include(pm.environment.get(\"Merchants\"));",
+									"});",
+									"",
+									"pm.test(\"Content-Type is present\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://7dbf3984-55c1-4f70-851b-4192dabd5815.mock.pstmn.io/merchants",
+							"protocol": "https",
+							"host": [
+								"7dbf3984-55c1-4f70-851b-4192dabd5815",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"merchants"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "List of Merchants",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://7dbf3984-55c1-4f70-851b-4192dabd5815.mock.pstmn.io/merchants",
+									"protocol": "https",
+									"host": [
+										"7dbf3984-55c1-4f70-851b-4192dabd5815",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"merchants"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "\"{{Merchants}}\""
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Branches",
+			"item": [
+				{
+					"name": "Add a Branch",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "23f58ba9-02f8-4dbc-95e0-cc17bb5a3536",
+								"exec": [
+									"const branches = [{",
+									"    \"BranchID\":     'AGGEDICT',",
+									"    \"BranchName\":   'AGG',",
+									"    \"BranchEmail\":   'agg_edict@gmail.com',",
+									"    \"BranchAddress\": 'Random Street, Bengaluru, 560004'",
+									"},",
+									"{",
+									"    \"BranchID\":     'GADEDICT',",
+									"    \"BranchName\":   'GAD',",
+									"    \"BranchEmail\":   'gad_edict@gmail.com',",
+									"    \"BranchAddress\": 'Random Street, Bengaluru, 560078'",
+									"},",
+									"{",
+									"    \"BranchID\":     'BACEDICT',",
+									"    \"BranchName\":   'BAC',",
+									"    \"BranchEmail\":  'bac_edict@gmail.com',",
+									"    \"BranchAddress\": 'Random Street, Bengaluru, 560008'",
+									"}",
+									"]",
+									"",
+									"const branch  = _.sample(branches)",
+									"pm.environment.set(\"BranchID\", branch.BranchID);",
+									"pm.environment.set(\"BranchName\", branch.BranchName);",
+									"pm.environment.set(\"BranchEmail\", branch.BranchEmail);",
+									"pm.environment.set(\"BranchAddress\", branch.BranchAddress);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "7eb57328-9562-49ce-88f3-9a6f29dec790",
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Verify MerchantID\", function () {",
+									"    var MerchantID = pm.environment.get(\"MerchantID\");",
+									"    pm.expect(jsonData.args.MerchantID).to.eql(MerchantID);",
+									"});",
+									"",
+									"pm.test(\"Verify BranchID\", function () {",
+									"    var BranchID = pm.environment.get(\"BranchID\");",
+									"    pm.expect(jsonData.args.BranchID).to.eql(BranchID);",
+									"});",
+									"",
+									"pm.test(\"Verify Branch Name\", function () {",
+									"    var Name = pm.environment.get(\"BranchName\");",
+									"    pm.expect(jsonData.args.BranchName).to.eql(Name);",
+									"});",
+									"",
+									"pm.test(\"Verify Branch Email\", function () {",
+									"    var Email = pm.environment.get(\"BranchEmail\");",
+									"    pm.expect(jsonData.args.BranchEmail).to.eql(Email);",
+									"});",
+									"",
+									"pm.test(\"Verify Branch Address\", function () {",
+									"    var Address = pm.environment.get(\"BranchAddress\");",
+									"    pm.expect(jsonData.args.BranchAddress).to.eql(Address);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "postman-echo.com/post?MerchantID={{MerchantID}}&BranchID={{BranchID}}&BranchName={{BranchName}}&BranchEmail={{BranchEmail}}&BranchAddress={{BranchAddress}}",
+							"host": [
+								"postman-echo",
+								"com"
+							],
+							"path": [
+								"post"
+							],
+							"query": [
+								{
+									"key": "MerchantID",
+									"value": "{{MerchantID}}"
+								},
+								{
+									"key": "BranchID",
+									"value": "{{BranchID}}"
+								},
+								{
+									"key": "BranchName",
+									"value": "{{BranchName}}"
+								},
+								{
+									"key": "BranchEmail",
+									"value": "{{BranchEmail}}"
+								},
+								{
+									"key": "BranchAddress",
+									"value": "{{BranchAddress}}"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Add a Branch",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://7dbf3984-55c1-4f70-851b-4192dabd5815.mock.pstmn.io/branches?MerchantID={{MerchantID}}&BranchID={{BranchID}}&BranchName={{BranchName}}&BranchEmail={{BranchEmail}}&BranchAddress={{BranchAddress}}",
+									"protocol": "https",
+									"host": [
+										"7dbf3984-55c1-4f70-851b-4192dabd5815",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"branches"
+									],
+									"query": [
+										{
+											"key": "MerchantID",
+											"value": "{{MerchantID}}"
+										},
+										{
+											"key": "BranchID",
+											"value": "{{BranchID}}"
+										},
+										{
+											"key": "BranchName",
+											"value": "{{BranchName}}"
+										},
+										{
+											"key": "BranchEmail",
+											"value": "{{BranchEmail}}"
+										},
+										{
+											"key": "BranchAddress",
+											"value": "{{BranchAddress}}"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"MerchantID\": \"{{MerchantID}}\",\n    \"BranchID\": \"{{BranchID}}\",\n    \"BranchName\": \"{{BranchName}}\",\n    \"BranchEmail\": \"{{BranchEmail}}\",\n    \"BranchAddress\": \"{{BranchAddress}}\",\n    \"Status\": \"Branch is Created\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update a Branch",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "ed9bd4e5-e8ab-4828-80c7-b47e895c0ddf",
+								"exec": [
+									"pm.environment.set(\"BranchID\", \"GADEDICT\");",
+									"pm.environment.set(\"BranchName\", \"GAD\");",
+									"pm.environment.set(\"BranchEmail\", \"gad_edict@gmail.com\");",
+									"pm.environment.set(\"BranchAddress\", \"Random Street, Bengaluru, 560078\");",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "6089b3a5-768c-4ee2-840a-6b855e5da040",
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Verify BranchID\", function () {",
+									"    var BranchID = pm.environment.get(\"BranchID\");",
+									"    pm.expect(jsonData.args.BranchID).to.eql(BranchID);",
+									"});",
+									"",
+									"pm.test(\"Verify Branch Name\", function () {",
+									"    var Name = pm.environment.get(\"BranchName\");",
+									"    pm.expect(jsonData.args.BranchName).to.eql(Name);",
+									"});",
+									"",
+									"pm.test(\"Verify Branch Email\", function () {",
+									"    var Email = pm.environment.get(\"BranchEmail\");",
+									"    pm.expect(jsonData.args.BranchEmail).to.eql(Email);",
+									"});",
+									"",
+									"pm.test(\"Verify Branch Address\", function () {",
+									"    var Address = pm.environment.get(\"BranchAddress\");",
+									"    pm.expect(jsonData.args.BranchAddress).to.eql(Address);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});",
+									"",
+									"postman.setNextRequest(\"List of Branches\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "postman-echo.com/put?BranchID={{BranchID}}&BranchName={{BranchName}}&BranchEmail={{BranchEmail}}&BranchAddress={{BranchAddress}}",
+							"host": [
+								"postman-echo",
+								"com"
+							],
+							"path": [
+								"put"
+							],
+							"query": [
+								{
+									"key": "BranchID",
+									"value": "{{BranchID}}"
+								},
+								{
+									"key": "BranchName",
+									"value": "{{BranchName}}"
+								},
+								{
+									"key": "BranchEmail",
+									"value": "{{BranchEmail}}"
+								},
+								{
+									"key": "BranchAddress",
+									"value": "{{BranchAddress}}"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update a Branch",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://7dbf3984-55c1-4f70-851b-4192dabd5815.mock.pstmn.io/branches?MerchantID={{MerchantID}}&BranchID={{BranchID}}&BranchName={{BranchName}}&BranchEmail={{BranchEmail}}&BranchAddress={{BranchAddress}}",
+									"protocol": "https",
+									"host": [
+										"7dbf3984-55c1-4f70-851b-4192dabd5815",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"branches"
+									],
+									"query": [
+										{
+											"key": "MerchantID",
+											"value": "{{MerchantID}}"
+										},
+										{
+											"key": "BranchID",
+											"value": "{{BranchID}}"
+										},
+										{
+											"key": "BranchName",
+											"value": "{{BranchName}}"
+										},
+										{
+											"key": "BranchEmail",
+											"value": "{{BranchEmail}}"
+										},
+										{
+											"key": "BranchAddress",
+											"value": "{{BranchAddress}}"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"MerchantID\": \"{{MerchantID}}\",\n    \"BranchID\": \"{{BranchID}}\",\n    \"BranchName\": \"{{BranchName}}\",\n    \"BranchEmail\": \"{{BranchEmail}}\",\n    \"BranchAddress\": \"{{BranchAddress}}\",\n    \"Status\": \"Branch is Updated\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Branch",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "127466b8-2870-4117-a416-b6d13ef2a5fe",
+								"exec": [
+									"pm.environment.unset(\"BranchName\");",
+									"pm.environment.unset(\"BranchEmail\");",
+									"pm.environment.unset(\"BranchAddress\");",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "c67ec9cc-8582-4928-aca2-05a7e5457d22",
+								"exec": [
+									"pm.test(\"Branch Deleted\", function () {",
+									"    pm.expect(pm.response.code).to.be.eql(200);",
+									"    pm.expect(pm.response.json().Status).to.be.eql('Branch is Deleted');",
+									"    pm.expect(pm.environment.get(\"BranchName\")).to.be.undefined;",
+									"    pm.expect(pm.environment.get(\"BranchEmail\")).to.be.undefined;",
+									"    pm.expect(pm.environment.get(\"BranchAddress\")).to.be.undefined;",
+									"});",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});",
+									"",
+									"postman.setNextRequest(\"null\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://7dbf3984-55c1-4f70-851b-4192dabd5815.mock.pstmn.io/merchant/branch_delete",
+							"protocol": "https",
+							"host": [
+								"7dbf3984-55c1-4f70-851b-4192dabd5815",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"merchant",
+								"branch_delete"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete Branch",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://7dbf3984-55c1-4f70-851b-4192dabd5815.mock.pstmn.io/merchant/branch_delete",
+									"protocol": "https",
+									"host": [
+										"7dbf3984-55c1-4f70-851b-4192dabd5815",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"merchant",
+										"branch_delete"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": ""
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": ""
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": ""
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Expose-Headers",
+									"value": ""
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 30 May 2019 07:10:57 GMT"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"ce-GI7UJMuei1uTCjhu36KGnw\""
+								},
+								{
+									"key": "Server",
+									"value": "nginx"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "x-srv-span",
+									"value": "v=1;s=821a64c94004af13"
+								},
+								{
+									"key": "x-srv-trace",
+									"value": "v=1;t=6d6fe6f70bb2f648"
+								},
+								{
+									"key": "Content-Length",
+									"value": "184"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"MerchantID\": \"{{MerchantID}}\",\n    \"BranchID\": \"{{BranchID}}\",\n    \"BranchName\": \"{{BranchName}}\",\n    \"BranchEmail\": \"{{BranchEmail}}\",\n    \"BranchAddress\": \"{{BranchAddress}}\",\n    \"Status\": \"Branch is Deleted\"\n}"
+						}
+					]
+				},
+				{
+					"name": "List of Branches",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "36ae2f81-c13c-4fed-ae83-b2de9d4d07e1",
+								"exec": [
+									"const branches = [{",
+									"    \"BranchID\":     'AGGEDICT',",
+									"    \"BranchName\":   'AGG',",
+									"    \"BranchEmail\":   'agg_edict@gmail.com',",
+									"    \"BranchAddress\": 'Random Street, Bengaluru, 560004'",
+									"},",
+									"{",
+									"    \"BranchID\":     'GADEDICT',",
+									"    \"BranchName\":   'GAD',",
+									"    \"BranchEmail\":   'gad_edict@gmail.com',",
+									"    \"BranchAddress\": 'Random Street, Bengaluru, 560078'",
+									"},",
+									"{",
+									"    \"BranchID\":     'BACEDICT',",
+									"    \"BranchName\":   'BAC',",
+									"    \"BranchEmail\":  'bac_edict@gmail.com',",
+									"    \"BranchAddress\": 'Random Street, Bengaluru, 560008'",
+									"}",
+									"]",
+									"",
+									"pm.environment.set(\"Branches\", JSON.stringify(branches));",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "cd578c6d-35d3-4902-b05b-bf64b876745e",
+								"exec": [
+									"pm.test(\"Response includes String\", function () {",
+									"    pm.expect(pm.response.text()).to.include(pm.environment.get(\"Branches\"));",
+									"});",
+									"",
+									"pm.test(\"Content-Type is present\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});",
+									"",
+									"postman.setNextRequest(\"Delete Branch\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://7dbf3984-55c1-4f70-851b-4192dabd5815.mock.pstmn.io/branches",
+							"protocol": "https",
+							"host": [
+								"7dbf3984-55c1-4f70-851b-4192dabd5815",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"branches"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "List of Branches",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://7dbf3984-55c1-4f70-851b-4192dabd5815.mock.pstmn.io/branches",
+									"protocol": "https",
+									"host": [
+										"7dbf3984-55c1-4f70-851b-4192dabd5815",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"branches"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "\"{{Branches}}\""
+						}
+					]
+				}
+			]
+		}
+	]
+}
