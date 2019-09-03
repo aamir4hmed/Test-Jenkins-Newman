@@ -1,7 +1,7 @@
 {
   "name": "Test-Jenkins-Newman",
   "version": "1.0.0",
-  "description": "A basic/dummy in-memory API for managing users.",
+  "description": "Testing Jenkins integration using Newman.",
   "main": "index.js",
   "repository": {
     "type": "git",
