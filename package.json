@@ -6,7 +6,6 @@
     "type": "git",
     "url": "git+https://github.com/aamir4hmed/Test-Jenkins-Newman.git"
   },
-  "scripts": {newman run PayAsYouGo.postman_collection.json -e AsYouGo.postman_environment.json},
   "author": "Aamir Ahmed",
   "license": "MIT",
   "bugs": {
